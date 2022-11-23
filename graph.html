@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head><title>Canvas code example</title>
+<script type="text/javascript">
+//y=A*sin*(x/T + F), где A- амплитуда сигнала, T- период, F -фаза
+
+function setA(value) {
+		A = value
+		draw()
+	}
+function setT(value) {
+		T = value
+		draw()
+	}
+function setF(value) {
+		F = value
+		draw()
+	}
+function setWidth(value) {
+		Width = value
+		draw()
+	}
+function setHeight(value) {
+		Height = value
+		draw()
+	}
+
+
+let Width = 600
+let Height = 600
+let A = 1
+let T = 2
+let F = 0
+
+const draw = () => {
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.canvas.width  = Width;
+ctx.canvas.height = Height;
+ctx.clearRect(0, 0, c.width, c.height);
+var i;
+
+var width = c.width;
+var height = c.height / 2;
+var step = 0.05;
+
+ctx.moveTo(0, height);
+ctx.lineTo(width, height);
+ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(0, height);
+//var c = width / Math.PI / (F * 2);
+
+for (i = 0; i < width; i += step) {
+		T = 1*T
+		F = 1*F
+  var x = A * Math.sin(i / T + F);
+
+  ctx.lineTo(i, height + x);
+}
+
+ctx.strokeStyle = '#0096FF';
+ctx.stroke();
+}
+</script>
+</head>
+<body onload="draw()">
+<p>Введите A: </p><input type="number" step=0.1 oninput="setA(this.value)" value=1 />
+<p>Введите T: </p><input type="number" step=0.1 oninput="setT(this.value)" value=2 />
+<p>Введите F: </p><input type="number" step=0.1 oninput="setF(this.value)" value=0 />
+<p>Введите Ширину: </p><input oninput="setWidth(this.value)" value=500 />
+<p>Введите Высоту: </p><input oninput="setHeight(this.value)" value=200 />
+<div></div>
+
+<canvas id="myCanvas" width="600" height="300" style="border:1px solid #d3d3d3;">
+
+</body>
+</html>
